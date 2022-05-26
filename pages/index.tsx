@@ -5,11 +5,12 @@ const Home: FC = () => {
   const fetchReddit = async (): Promise<void> => {
     const data = await fetch('https://api.imgur.com/3/gallery/r/memes/top/month/1', {
       headers: new Headers({
-        Authorization: 'Bearer 10d1babe6435548c5e55cee7e5105d076de72ab5',
+        // Authorization: 'Bearer 10d1babe6435548c5e55cee7e5105d076de72ab5',
+        Authorization: 'Client-ID 6032b198289e792',
       }),
     });
-
-    console.log(data);
+    const res = await data.json();
+    console.log(res);
   };
 
   useEffect(() => {
