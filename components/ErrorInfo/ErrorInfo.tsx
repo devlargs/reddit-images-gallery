@@ -5,7 +5,7 @@ const ErrorInfo: VFC = () => (
   <Box maxW="1200px" m="auto">
     <Alert status="error">
       <AlertIcon />
-      <AlertTitle>No data found!</AlertTitle>
+      <AlertTitle>No Image Gallery found!</AlertTitle>
       <AlertDescription>Please try another keyword.</AlertDescription>
     </Alert>
   </Box>
