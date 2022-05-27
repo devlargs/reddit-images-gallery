@@ -16,7 +16,7 @@ const Header: VFC = () => {
   }, [searchQuery]);
 
   return (
-    <Box h="80px" bg="blue.900" position="fixed" width="100%" px="4">
+    <Box h="80px" bg="blue.900" position="fixed" width="100%" px="4" zIndex={1}>
       <Flex h="80px" alignItems="center" maxW="1200px" m="auto" justifyContent="space-between">
         <Flex alignItems="center">
           <Text ml="4" mr="10" color="white" fontWeight="bold">
