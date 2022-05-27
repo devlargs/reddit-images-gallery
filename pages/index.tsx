@@ -7,7 +7,7 @@ import { RedditProps } from 'typings/reddit';
 
 const Home: FC = () => {
   const searchText = useRedditSearch((e) => e.searchText);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState<RedditProps[]>([]);
 
   const fetchReddit = async (searchText): Promise<void> => {
