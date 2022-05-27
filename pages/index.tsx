@@ -1,8 +1,6 @@
-import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
-import { Box, chakra, Flex, Image, Spinner, Text } from '@chakra-ui/react';
-import Card from '@components/Card';
-import ErrorInfo from '@components/ErrorInfo';
+import { Box, Spinner } from '@chakra-ui/react';
 import RedditSubHeader from '@components/RedditSubHeader';
+import SubredditGalleries from '@components/SubredditGalleries';
 import { FC, useEffect, useState } from 'react';
 import useRedditSearch from 'store/useRedditInput';
 import { RedditProps } from 'typings/reddit';
@@ -39,56 +37,7 @@ const Home: FC = () => {
             <Spinner size="lg" mt="3" />
           </Box>
         ) : (
-          <Box>
-            {data.length ? (
-              <Box maxW="1000px" m="auto" px="10">
-                <Flex>
-                  <Box maxW="640px">
-                    {data.map((item) => {
-                      return (
-                        <Card key={item.id}>
-                          <Flex>
-                            <Box mr="4" textAlign="center">
-                              <ArrowUpIcon
-                                _hover={{
-                                  color: 'green',
-                                  fontWeight: 'bold',
-                                  fontSize: '20px',
-                                }}
-                                transition="0.5s ease"
-                                cursor="pointer"
-                              />
-                              <Text>{item.views > 1000 ? `${(item.views / 1000).toFixed(2)}k` : item.score}</Text>
-                              <ArrowDownIcon
-                                mt="-2"
-                                _hover={{
-                                  color: 'red',
-                                  fontWeight: 'bold',
-                                  fontSize: '24px',
-                                }}
-                                transition="0.5s ease"
-                                cursor="pointer"
-                              />
-                            </Box>
-                            <Box>
-                              <chakra.h3 color="#2e2e2e" fontWeight="bold" fontSize="24px" mb="4">
-                                {item.title}
-                              </chakra.h3>
-                              <Image src={item.link} alt={item.title} />
-                            </Box>
-                          </Flex>
-                        </Card>
-                      );
-                    })}
-                  </Box>
-
-                  <Box>Lorem</Box>
-                </Flex>
-              </Box>
-            ) : (
-              <ErrorInfo />
-            )}
-          </Box>
+          <SubredditGalleries data={data} />
         )}
       </Box>
     </Box>

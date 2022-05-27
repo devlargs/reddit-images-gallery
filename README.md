@@ -1,6 +1,6 @@
-# NextJS, Typescript, Chakra UI Boilerplate
+# Imgur Subreddit Galleries
 
-A simple repository that bootstraps application. npm packages will be updated from time to time.
+An application that connects to imgur api to render subreddit galleries
 
 ## Setup
 
@@ -21,10 +21,6 @@ The boilerplate has basic default folders. The top level directory structure wil
 - pages - NextJS page files
 - public - folder for self hosted assets
 - store - Global state management tool
-
-## Path aliasing
-
-Added path aliasing **(@folder-name)** is used to easily determine which files were imported locally and from library, this is very helpful for better organization of imports. Library imports should come first then local.
 
 ## We use this tools
 

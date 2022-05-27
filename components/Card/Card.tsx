@@ -1,7 +1,7 @@
-import { Box } from '@chakra-ui/react';
+import { Box, BoxProps } from '@chakra-ui/react';
 import { FC } from 'react';
 
-const Card: FC = ({ children }) => {
+const Card: FC<BoxProps> = ({ children, ...restProps }) => {
   return (
     <Box
       bg="white"
@@ -13,6 +13,7 @@ const Card: FC = ({ children }) => {
         border: '1px solid black',
       }}
       transition="0.5s ease-in"
+      {...restProps}
     >
       {children}
     </Box>
