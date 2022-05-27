@@ -5,9 +5,25 @@ import StaticInfo from '@components/StaticInfo';
 import Upvote from '@components/Upvote';
 import casual from 'casual-browserify';
 import { FC } from 'react';
+import { BiCommentDetail, BiDownload, BiShareAlt } from 'react-icons/bi';
 import { RedditProps } from 'typings/reddit';
 
 const SubredditGalleries: FC<{ data: RedditProps[] }> = ({ data }) => {
+  const buttons = [
+    {
+      text: 'Comments',
+      icon: <BiCommentDetail />,
+    },
+    {
+      text: 'Share',
+      icon: <BiShareAlt />,
+    },
+    {
+      text: 'Save',
+      icon: <BiDownload />,
+    },
+  ];
+
   return (
     <Box>
       {data.length ? (
@@ -36,6 +52,26 @@ const SubredditGalleries: FC<{ data: RedditProps[] }> = ({ data }) => {
                           {item.title}
                         </chakra.h3>
                         <Image src={item.link} alt={item.title} />
+                        <Flex mt="8">
+                          {buttons.map((item, i) => (
+                            <Box cursor="pointer" key={i} mr={5}>
+                              <Flex alignItems="center">
+                                {item.icon}
+                                <Text
+                                  ml="1"
+                                  fontSize="12px"
+                                  color="#878a8c"
+                                  lineHeight="12px"
+                                  _hover={{
+                                    fontWeight: 'bold',
+                                  }}
+                                >
+                                  {item.text}
+                                </Text>
+                              </Flex>
+                            </Box>
+                          ))}
+                        </Flex>
                       </Box>
                     </Flex>
                   </Card>
