@@ -4,7 +4,7 @@ import { VFC } from 'react';
 
 const Header: VFC = () => {
   return (
-    <Box h="80px" bg="blue.900">
+    <Box h="80px" bg="blue.900" position="fixed" width="100%">
       <Flex h="80px" alignItems="center" maxW="1200px" m="auto">
         <Text ml="4" mr="10" color="white" fontWeight="bold">
           Reddit Images Gallery
