@@ -1,59 +1,38 @@
 import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
-import {
-  Alert,
-  AlertDescription,
-  AlertIcon,
-  AlertTitle,
-  Box,
-  chakra,
-  Flex,
-  Image,
-  Spinner,
-  Text,
-  useBoolean,
-} from '@chakra-ui/react';
+import { Box, chakra, Flex, Image, Spinner, Text } from '@chakra-ui/react';
 import Card from '@components/Card';
+import ErrorInfo from '@components/ErrorInfo';
+import RedditSubHeader from '@components/RedditSubHeader';
 import { FC, useEffect, useState } from 'react';
+import useRedditSearch from 'store/useRedditInput';
 import { RedditProps } from 'typings/reddit';
 
 const Home: FC = () => {
-  const [loading, setLoading] = useBoolean(false);
-  const [data, setData] = useState([]);
+  const searchText = useRedditSearch((e) => e.searchText);
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<RedditProps[]>([]);
 
-  const fetchReddit = async (): Promise<void> => {
-    setLoading.toggle();
-    const data = await fetch('https://api.imgur.com/3/gallery/r/memes/top/month/1', {
+  const fetchReddit = async (searchText): Promise<void> => {
+    const data = await fetch(`https://api.imgur.com/3/gallery/r/${searchText}/top/month/1`, {
       headers: new Headers({
         Authorization: `${process.env.NEXT_PUBLIC_IMGUR_AUTH}`,
       }),
     });
     const res = await data.json();
-    console.log(res);
     const imageTypes = ['image/jpeg', 'image/gif', 'image/png', 'image/webp'];
     setData(res.data.filter((item: RedditProps) => imageTypes.includes(item.type)));
-    setLoading.toggle();
+    setLoading(false);
   };
 
   useEffect(() => {
-    void fetchReddit();
-  }, []);
+    setLoading(true);
+    void fetchReddit(searchText);
+  }, [searchText]);
 
   return (
     <Box pt="80px">
-      <Box h="64px" bg="#33A8FF"></Box>
-      <Box h="80px" maxW="1200px" m="auto">
-        <Flex>
-          <Box boxSize="80px" borderRadius="50%" bg="blue.500" border="3px solid white" mt="-5" />
-          <Box>
-            <Text fontSize="28px" ml="4">
-              Memes
-            </Text>
-            <Text fontSize="16px" ml="4" color="gray.400">
-              r/memes
-            </Text>
-          </Box>
-        </Flex>
-      </Box>
+      <Box h="64px" bg="#33A8FF" />
+      <RedditSubHeader loading={loading} />
       <Box bg="#DAE0E6" minH="calc(100vh - 224px)" pt="4">
         {loading ? (
           <Box d="flex" justifyContent="center">
@@ -65,7 +44,7 @@ const Home: FC = () => {
               <Box maxW="1000px" m="auto" px="10">
                 <Flex>
                   <Box maxW="640px">
-                    {data.map((item: RedditProps) => {
+                    {data.map((item) => {
                       return (
                         <Card key={item.id}>
                           <Flex>
@@ -107,13 +86,7 @@ const Home: FC = () => {
                 </Flex>
               </Box>
             ) : (
-              <Box d="flex">
-                <Alert status="error">
-                  <AlertIcon />
-                  <AlertTitle>No data found!</AlertTitle>
-                  <AlertDescription>Please try another keyword.</AlertDescription>
-                </Alert>
-              </Box>
+              <ErrorInfo />
             )}
           </Box>
         )}
