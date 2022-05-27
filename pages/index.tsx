@@ -1,6 +1,7 @@
 import { Box, Spinner } from '@chakra-ui/react';
 import RedditSubHeader from '@components/RedditSubHeader';
 import SubredditGalleries from '@components/SubredditGalleries';
+import Head from 'next/head';
 import { FC, useEffect, useState } from 'react';
 import useRedditSearch from 'store/useRedditInput';
 import { RedditProps } from 'typings/reddit';
@@ -33,19 +34,24 @@ const Home: FC = () => {
   }, [searchText]);
 
   return (
-    <Box pt="80px">
-      <Box h="64px" bg="#33A8FF" />
-      <RedditSubHeader loading={loading} />
-      <Box bg="#DAE0E6" minH="calc(100vh - 224px)" pt="4">
-        {loading ? (
-          <Box d="flex" justifyContent="center">
-            <Spinner size="lg" mt="3" />
-          </Box>
-        ) : (
-          <SubredditGalleries data={data} />
-        )}
+    <>
+      <Head>
+        <title>Imgur Subreddit Galleries</title>
+      </Head>
+      <Box pt="80px">
+        <Box h="64px" bg="#33A8FF" />
+        <RedditSubHeader loading={loading} />
+        <Box bg="#DAE0E6" minH="calc(100vh - 224px)" pt="4">
+          {loading ? (
+            <Box d="flex" justifyContent="center">
+              <Spinner size="lg" mt="3" />
+            </Box>
+          ) : (
+            <SubredditGalleries data={data} />
+          )}
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 };
 
