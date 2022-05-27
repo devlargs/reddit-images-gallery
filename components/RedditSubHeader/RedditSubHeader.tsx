@@ -12,12 +12,16 @@ const RedditSubHeader: FC<{ loading: boolean }> = ({ loading }) => {
         <Box>
           <Skeleton mt="2" isLoaded={!loading}>
             <Text fontSize="28px" ml="4">
-              {searchText}
+              {searchText ? searchText : 'Search something'}
             </Text>
 
-            <Text fontSize="16px" ml="4" color="gray.400">
-              r/{searchText.toLowerCase()}
-            </Text>
+            {searchText ? (
+              <Text fontSize="16px" ml="4" color="gray.400">
+                r/{searchText.toLowerCase()}
+              </Text>
+            ) : (
+              <></>
+            )}
           </Skeleton>
         </Box>
       </Flex>

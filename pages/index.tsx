@@ -11,15 +11,20 @@ const Home: FC = () => {
   const [data, setData] = useState<RedditProps[]>([]);
 
   const fetchReddit = async (searchText): Promise<void> => {
-    const data = await fetch(`https://api.imgur.com/3/gallery/r/${searchText}/top/month/1`, {
-      headers: new Headers({
-        Authorization: `${process.env.NEXT_PUBLIC_IMGUR_AUTH}`,
-      }),
-    });
-    const res = await data.json();
-    const imageTypes = ['image/jpeg', 'image/gif', 'image/png', 'image/webp'];
-    setData(res.data.filter((item: RedditProps) => imageTypes.includes(item.type)));
-    setLoading(false);
+    try {
+      const data = await fetch(`https://api.imgur.com/3/gallery/r/${searchText}/top/month/1`, {
+        headers: new Headers({
+          Authorization: `${process.env.NEXT_PUBLIC_IMGUR_AUTH}`,
+        }),
+      });
+      const res = await data.json();
+      const imageTypes = ['image/jpeg', 'image/gif', 'image/png', 'image/webp'];
+      setData(res.data.filter((item: RedditProps) => imageTypes.includes(item.type)));
+    } catch (ex) {
+      setData([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
