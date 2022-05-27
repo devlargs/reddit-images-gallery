@@ -1,8 +1,8 @@
-import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import { Box, chakra, Flex, Image, Text } from '@chakra-ui/react';
 import Card from '@components/Card';
 import ErrorInfo from '@components/ErrorInfo';
 import StaticInfo from '@components/StaticInfo';
+import Upvote from '@components/Upvote';
 import casual from 'casual-browserify';
 import { FC } from 'react';
 import { RedditProps } from 'typings/reddit';
@@ -26,26 +26,7 @@ const SubredditGalleries: FC<{ data: RedditProps[] }> = ({ data }) => {
                   <Card key={item.id}>
                     <Flex>
                       <Box mr="4" textAlign="center">
-                        <ArrowUpIcon
-                          _hover={{
-                            color: 'green',
-                            fontWeight: 'bold',
-                            fontSize: '20px',
-                          }}
-                          transition="0.5s ease"
-                          cursor="pointer"
-                        />
-                        <Text>{item.views > 1000 ? `${(item.views / 1000).toFixed(2)}k` : item.score}</Text>
-                        <ArrowDownIcon
-                          mt="-2"
-                          _hover={{
-                            color: 'red',
-                            fontWeight: 'bold',
-                            fontSize: '24px',
-                          }}
-                          transition="0.5s ease"
-                          cursor="pointer"
-                        />
+                        <Upvote views={item.score} />
                       </Box>
                       <Box>
                         <Text color="#787CA6" fontSize="12px" fontWeight="400">
