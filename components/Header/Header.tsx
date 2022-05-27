@@ -15,7 +15,7 @@ const Header: VFC = () => {
   }, [searchQuery]);
 
   return (
-    <Box h="80px" bg="blue.900" position="fixed" width="100%">
+    <Box h="80px" bg="blue.900" position="fixed" width="100%" px="4">
       <Flex h="80px" alignItems="center" maxW="1200px" m="auto">
         <Text ml="4" mr="10" color="white" fontWeight="bold">
           Imgur Subreddit Galleries

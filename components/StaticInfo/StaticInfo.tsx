@@ -9,7 +9,7 @@ const StaticInfo: VFC = () => {
 
   return (
     <>
-      {[`About ${searchText.toLowerCase()}`, 'You can also search', 'FAQ', 'Rules'].map((item, index) => {
+      {[`About ${searchText.toLowerCase()}`, 'You can also check', 'FAQ', 'Rules'].map((item, index) => {
         return (
           <Box key={index}>
             <Card minW="310px" p="0">

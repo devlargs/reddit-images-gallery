@@ -8,7 +8,10 @@ const Card: FC<BoxProps> = ({ children, ...restProps }) => {
       border="1px solid lightgray"
       mb="4"
       borderRadius="3px"
-      p="10"
+      p={{
+        base: 5,
+        md: '10',
+      }}
       _hover={{
         border: '1px solid black',
       }}

@@ -11,9 +11,16 @@ const SubredditGalleries: FC<{ data: RedditProps[] }> = ({ data }) => {
   return (
     <Box>
       {data.length ? (
-        <Box maxW="1000px" m="auto" px="10">
+        <Box
+          maxW="1000px"
+          m="auto"
+          px={{
+            base: 0,
+            lg: 10,
+          }}
+        >
           <Flex>
-            <Box maxW="640px" mr="4">
+            <Box maxW="640px" mx="4">
               {data.map((item) => {
                 return (
                   <Card key={item.id}>
@@ -55,7 +62,7 @@ const SubredditGalleries: FC<{ data: RedditProps[] }> = ({ data }) => {
               })}
             </Box>
 
-            <Box>
+            <Box d={{ base: 'none', lg: 'initial' }}>
               <StaticInfo />
             </Box>
           </Flex>
